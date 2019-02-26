@@ -256,6 +256,7 @@ sub to_graphql {
     } $source->relationships;
     for my $column (keys %$columns_info) {
       my $info = $columns_info->{$column};
+      $info->{data_type} //= 'text';
       DEBUG and _debug("schema_dbic2graphql($name.col)", $column, $info);
       my $rawtype = $TYPEMAP{ lc $info->{data_type} };
       if ( 'CODE' eq ref $rawtype ) {
